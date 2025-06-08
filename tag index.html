@@ -1,0 +1,174 @@
+06.08 1:10 PM
+Tag ganret
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Tags Extractor Tool - फ्री YouTube टैग्स कॉपी करें</title>
+  <meta name="description" content="YouTube वीडियो से असली टैग्स निकालें और कॉपी करें। बिल्कुल फ्री, मोबाइल फ्रेंडली टूल जो SEO और कंटेंट क्रिएटर्स के लिए जरूरी है।" />
+  <meta name="keywords" content="YouTube Tags Extractor, टैग्स निकालें, YouTube SEO Tool, Copy Video Tags, Free Tool YouTube" />
+  <meta name="author" content="Your Name or Brand" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      color: #d32f2f;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #d32f2f;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    #output {
+      background: #fafafa;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .ad-container {
+      margin: 25px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>YouTube Video Tags Extractor</h1>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-0000000000000000"
+          data-ad-slot="1111111111"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <input type="text" id="videoUrl" placeholder="YouTube वीडियो URL यहाँ डालें" />
+    <button onclick="extractTags()">Get Tags</button>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-0000000000000000"
+          data-ad-slot="2222222222"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div id="output"></div>
+
+    <!-- Ad Slot 3 -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-0000000000000000"
+          data-ad-slot="3333333333"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Ad Slot 4 -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-0000000000000000"
+          data-ad-slot="4444444444"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 - YouTube Tags Extractor Tool by YourBrandName
+  </footer>
+
+  <script>
+    async function extractTags() {
+      const url = document.getElementById("videoUrl").value;
+      const videoId = url.split("v=")[1]?.split("&")[0];
+      if (!videoId) {
+        alert("कृपया सही YouTube वीडियो URL डालें।");
+        return;
+      }
+
+      const proxy = "https://api.allorigins.win/get?url=";
+      const targetURL = `https://www.youtube.com/watch?v=${videoId}`;
+      const fetchURL = proxy + encodeURIComponent(targetURL);
+
+      try {
+        const res = await fetch(fetchURL);
+        const data = await res.json();
+
+        const html = data.contents;
+        const tagMatch = html.match(/<meta name="keywords" content="([^"]+)"/);
+        const titleMatch = html.match(/<title>(.*?)<\/title>/);
+
+        if (tagMatch) {
+          const tags = tagMatch[1].split(',').map(tag => tag.trim()).join(', ');
+          document.getElementById("output").innerHTML = `
+            <strong>Title:</strong> ${titleMatch ? titleMatch[1] : "Unknown"}<br><br>
+            <strong>Tags:</strong><br>${tags}
+          `;
+        } else {
+          document.getElementById("output").innerText = "Tags नहीं मिल पाए।";
+        }
+      } catch (e) {
+        document.getElementById("output").innerText = "Error: Tags extract नहीं कर सके।";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
